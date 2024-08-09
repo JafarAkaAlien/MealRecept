@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -16,7 +17,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    buildFeatures{
+        viewBinding = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -37,6 +40,18 @@ android {
 
 dependencies {
 
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //rest
+
+    implementation(libs.androidx.room.coroutines)
+    ksp(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
